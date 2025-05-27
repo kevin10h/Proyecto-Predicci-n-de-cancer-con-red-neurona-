@@ -1,0 +1,1 @@
+sistema inteligente capaz de predecir el riesgo de infección por VIH a partir de datos personales, clínicos y conductuales que cualquier persona puede completar desde casa, sin necesidad de exámenes médicos.
