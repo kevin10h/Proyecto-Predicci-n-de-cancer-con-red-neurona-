@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %} Test de Predicción de VIH {% endblock %}
+{% load static %}
+{% block head %}
+<link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/colorpicker/bootstrap-colorpicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/chosen/bootstrap-chosen.css' %}" rel="stylesheet">
+
+{% endblock %}
+{% block custom_scripts %}
+<style>
+    .center {
+        justify-content: center;
+        text-align: center;
+    }
+
+    
+    .nav-link.active {
+        background-color: #FFFFFF!important;
+    }
+
+    .calendar-box {
+        background-color: #3498db;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .calendar-date {
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
+    }
+    
+    .calendar-month {
+        font-size: 14px;
+        margin: 0;
+    }
+      
+    .custom-pagination {
+        margin-top: 20px; /* Espacio superior entre la tabla y la paginación */
+        text-align: center; /* Centra los elementos de la paginación */
+    }
+    
+    .custom-pagination .first {
+        margin: 0 5px; /* Espacio entre los enlaces de paginación */
+        text-decoration: none; /* Elimina la subraya predeterminada */
+        color: #ffffff; /* Color de los enlaces de paginación */
+        font-weight: bold;
+        background-color: #00A5E3;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .custom-pagination .second {
+        margin: 0 5px; /* Espacio entre los enlaces de paginación */
+        text-decoration: none; /* Elimina la subraya predeterminada */
+        color: #000000; /* Color de los enlaces de paginación */
+        font-weight: bold;
+    }
+    
+    .custom-pagination .current-page {
+        font-weight: bold;
+        color: #333; /* Color del número de página actual */
+        background-color: #cdcdcd;
+        padding: 10px;
+        border-radius: 10px;
+    }
+   
+  </style>
+{% endblock %}
+
+{% block content %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+
+        <div class="ibox">
+            <div class="ibox-title">
+                <h2>Resultado de Predicción</h2>
+            </div>
+            <div class="ibox-content">
+                
+                <p><strong>Resultado: {{ resultado }}</strong></p>
+                <p><strong>Resultado en porcentaje:</strong> {{ confianza }}%</p>
+
+                <p><strong>Precisión del modelo:</strong> 94%</p>
+                <p>Este valor indica cuán precisa ha sido la inteligencia artificial al evaluar cientos de casos de prueba. Significa que acierta aproximadamente 94 de cada 100 veces.</p>
+
+                <hr>
+
+                {% if resultado == "POSITIVO" %}
+                <h3 style="color:red;">Recomendaciones:</h3>
+                <ul>
+                    <li>Acude a un centro médico especializado para realizarte una prueba serológica confirmatoria.</li>
+                    <li>No entres en pánico: esta predicción es solo una estimación estadística.</li>
+                    <li>Evita conductas de riesgo mientras obtienes un diagnóstico definitivo.</li>
+                    <li>Habla con un profesional de salud para recibir orientación y apoyo psicológico si lo necesitas.</li>
+                </ul>
+                {% else %}
+                <h3 style="color:green;">Recomendaciones:</h3>
+                <ul>
+                    <li>Continúa manteniendo prácticas sexuales seguras y responsables.</li>
+                    <li>Usa protección en todas tus relaciones sexuales, especialmente si tienes múltiples parejas.</li>
+                    <li>Realiza chequeos médicos periódicos, incluso si no tienes síntomas.</li>
+                    <li>Si estás en un grupo de riesgo, considera realizarte pruebas regulares de ITS.</li>
+                </ul>
+                {% endif %}
+
+                <hr>
+
+
+                <a class="btn btn-primary" href="{% url 'prediccion_vih' %}">Realizar otra predicción</a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{% static 'js/plugins/chosen/chosen.jquery.js'%}"></script>
+    <script src="{% static 'smart-selects/admin/js/chainedfk.js' %}"></script>
+    <script src="{% static 'smart-selects/admin/js/bindfields.js' %}"></script>
+
+
+    <!-- Date picker -->
+    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+
+    <!-- Color picker -->
+    <script src="{% static 'js/plugins/colorpicker/bootstrap-colorpicker.min.js' %}"></script>
+
+    <!-- Clock picker -->
+    <script src="{% static 'js/plugins/clockpicker/clockpicker.js' %}"></script>
+
+
+
+    <script src="{% static 'js/ajax-models.js' %}"></script>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}
